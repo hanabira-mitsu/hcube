@@ -34,8 +34,8 @@ func _ready():
 
 func killPlayer(): #rip harper
 	dead = true
-	if not $SoundPlayers/dead.playing:
-		$SoundPlayers/dead.play()
+	#if not $SoundPlayers/dead.playing:
+		#$SoundPlayers/dead.play() ive lost the sound file
 	$"../ScreenCamera/ColorRect/AnimationPlayer".play("flash")
 	if playerSprite.direction == "right":
 		$Sprite.play("dead")

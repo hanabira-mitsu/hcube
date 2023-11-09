@@ -32,3 +32,4 @@ layer_0/tile_data = PackedInt32Array(1310697, 65536, 0, 1310698, 65536, 0, 13106
 position = Vector2(-555, 299)
 
 [node name="ScreenCamera" parent="." instance=ExtResource("6")]
+visible = false
