@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 	#tween.tween_property(self, "global_position", Vector2i(Target.position.x, Target.position.y), align_time)
 	if floor(self.position.distance_to(Vector2(Target.position.x, self.position.y))) > 40:
 		self.position.x = move_toward(self.position.x, Target.position.x, 5)
-	if floor(self.position.distance_to(Vector2(Target.position.y, self.position.y))) > 40:
+	if floor(self.position.distance_to(Vector2(Target.position.y, self.position.y))) > 0:
 		self.position.y = move_toward(self.position.y, Target.position.y, 5)
 
 # Calculating the gridnapped position
