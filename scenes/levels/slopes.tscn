@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtginp0to5j8l"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_xi6fx"]
+[ext_resource type="PackedScene" path="res://scenes/level bits/object_map.tscn" id="3_i4tow"]
+[ext_resource type="Texture2D" uid="uid://b3flu5c54j2ln" path="res://sprites/player/right.png" id="4_xf1he"]
+[ext_resource type="Texture2D" uid="uid://cxww84bibrh53" path="res://sprites/test.png" id="4_yf58m"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3wk4m"]
+radius = 15.0333
+
+[node name="Level" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_xi6fx")
+
+[node name="background" type="ColorRect" parent="."]
+offset_left = -1254.0
+offset_top = -1459.0
+offset_right = 1306.0
+offset_bottom = 813.0
+color = Color(0.0980392, 0.235294, 0.258824, 1)
+
+[node name="ObjectMap" parent="." instance=ExtResource("3_i4tow")]
+position = Vector2(0, 0)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(63, -302)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(-4.76837e-07, 4.76837e-07)
+texture = ExtResource("4_xf1he")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CircleShape2D_3wk4m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(640, 360)
+polygon = PackedVector2Array(-593, -357.9, -593, -33, -589.2, 3, -588.4, 3, -578.3, 50, -577.6, 50, -561.6, 94, -560.8, 94, -532.8, 145, -532, 145, -507, 178, -506.1, 178, -481.2, 204, -479.2, 204, -455.3, 225, -453.4, 225, -420.4, 247, -418.5, 247, -379.5, 266, -376.7, 266, -340.7, 278, -335.8, 278, -298.6, 285, 284, 285, 284, 284.1, 313, 282.1, 313, 281.4, 354, 273.3, 354, 272.5, 388, 261.6, 388, 260.8, 436, 236.8, 436, 236, 472, 211, 472, 210.1, 507, 177.1, 507, 175.3, 527, 152.3, 527, 150.4, 551, 114.4, 551, 112.5, 566, 83.5, 566, 80.6, 579, 47.6, 579, 43.7, 586, 19.7, 586, 14.8, 592, -20.3, 592, -358, 595, -358, 638, -360, 638, -357, 640, 358, 637, 358, -638, 360, -638, -360, -636, -360)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(640, 360)
+texture = ExtResource("4_yf58m")
