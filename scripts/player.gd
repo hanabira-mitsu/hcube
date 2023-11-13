@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # mess with these 4 consts till it feels right
 var gravity = 850
-var xspeed = 5
+var xspeed = 15
 var jumpHeight = 6
 var diveSpeed = 170
 var diveHeight = 200
@@ -94,6 +94,7 @@ func _input(event):
 				velocity.x = -diveSpeed
 			await get_tree().create_timer(0.18).timeout
 			xMovement = true
+			
 
 func _physics_process(delta):
 	if dead:
@@ -104,13 +105,13 @@ func _physics_process(delta):
 		if Input.is_action_pressed("ui_left"):
 			if velocity.x > 0:
 				velocity.x = 0
-			velocity.x = -xspeed / delta
+			velocity.x = move_toward(velocity.x, -xspeed / delta, 6)
 		elif Input.is_action_pressed("ui_right"):
 			if velocity.x < 0:
 				velocity.x = 0
-			velocity.x = xspeed / delta
+			velocity.x = move_toward(velocity.x, xspeed / delta, 6)
 		elif diving == false:
-			velocity.x = 0
+			velocity.x = move_toward(velocity.x, 0, 8)
 	velocity.y += delta * gravity
 	if velocity.y > 600:
 		velocity.y = gravity
