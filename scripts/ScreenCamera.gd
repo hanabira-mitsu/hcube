@@ -26,10 +26,11 @@ func _physics_process(_delta: float) -> void:
 	# Actual movement
 	#var tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUINT)
 	#tween.tween_property(self, "global_position", Vector2i(Target.position.x, Target.position.y), align_time)
-	if floor(self.position.distance_to(Vector2(Target.position.x, self.position.y))) > 40:
-		self.position.x = move_toward(self.position.x, Target.position.x, 5)
+	#if floor(self.position.distance_to(Vector2(Target.position.x, self.position.y))) > 40:
+		#self.position.x = move_toward(self.position.x, Target.position.x, 20)
+	self.position.x = Target.position.x
 	if floor(self.position.distance_to(Vector2(Target.position.y, self.position.y))) > 30:
-		self.position.y = move_toward(self.position.y, Target.position.y, 5)
+		self.position.y = move_toward(self.position.y, Target.position.y, 20)
 
 # Calculating the gridnapped position
 #func desired_position() -> Vector2:
