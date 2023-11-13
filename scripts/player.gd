@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # mess with these 4 consts till it feels right
 var gravity = 850
-var xspeed = 15
+var xspeed = 10
 var jumpHeight = 6
 var diveSpeed = 170
 var diveHeight = 200
@@ -94,24 +94,31 @@ func _input(event):
 				velocity.x = -diveSpeed
 			await get_tree().create_timer(0.18).timeout
 			xMovement = true
-			
+		if !(Input.is_action_pressed("boost")):
+			xspeed = 10
 
 func _physics_process(delta):
 	if dead:
 		return
 	if is_on_floor() or onWall() != "none":
 		diving = false
+	if (Input.is_action_pressed("boost")):
+		xspeed = 20
+		if $Sprite.direction == "right":
+			velocity.x = xspeed / delta
+		else:
+			velocity.x = -xspeed / delta
 	if xMovement == true:
 		if Input.is_action_pressed("ui_left"):
 			if velocity.x > 0:
 				velocity.x = 0
-			velocity.x = move_toward(velocity.x, -xspeed / delta, 6)
+			velocity.x = move_toward(velocity.x, -xspeed / delta, 10)
 		elif Input.is_action_pressed("ui_right"):
 			if velocity.x < 0:
 				velocity.x = 0
-			velocity.x = move_toward(velocity.x, xspeed / delta, 6)
+			velocity.x = move_toward(velocity.x, xspeed / delta, 10)
 		elif diving == false:
-			velocity.x = move_toward(velocity.x, 0, 8)
+			velocity.x = move_toward(velocity.x, 0, 20)
 	velocity.y += delta * gravity
 	if velocity.y > 600:
 		velocity.y = gravity
