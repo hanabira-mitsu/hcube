@@ -1,14 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://beiklnkl2p5g8"]
+[gd_scene load_steps=6 format=3 uid="uid://beiklnkl2p5g8"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1"]
 [ext_resource type="TileSet" uid="uid://btbbl650ijstx" path="res://tiles/tilesets/lines.tres" id="2_lswpt"]
-[ext_resource type="Script" path="res://scripts/TileMap.gd" id="3"]
-[ext_resource type="PackedScene" path="res://scenes/level bits/object_map.tscn" id="4"]
-[ext_resource type="PackedScene" path="res://scenes/level bits/player.tscn" id="5"]
+[ext_resource type="Script" path="res://scripts/level bits/TileMap.gd" id="3"]
+[ext_resource type="PackedScene" uid="uid://bav51ulatkha3" path="res://scenes/level bits/object_map.tscn" id="4"]
+[ext_resource type="TileSet" uid="uid://bfgk00t3l8w7v" path="res://tiles/objects/objects.tres" id="4_m70en"]
 [ext_resource type="PackedScene" uid="uid://n5mwksge6qv8" path="res://scenes/level bits/ScreenCamera.tscn" id="6"]
 
 [node name="Level" type="Node2D"]
-script = ExtResource("1")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -812.0
@@ -26,10 +24,8 @@ script = ExtResource("3")
 
 [node name="ObjectMap" parent="." instance=ExtResource("4")]
 position = Vector2(0, 0)
-layer_0/tile_data = PackedInt32Array(1310697, 65536, 0, 1310698, 65536, 0, 1310699, 65536, 0, 1310700, 65536, 0, 1310701, 65536, 0, 1310702, 65536, 0, 1310703, 65536, 0, 1310704, 65536, 0, 1310705, 65536, 0, 1310706, 65536, 0, 1310707, 65536, 0, 1310708, 65536, 0, 1310709, 65536, 0, 1310710, 65536, 0, 1310711, 65536, 0, 1310712, 65536, 0, 1310713, 65536, 0, 1310714, 65536, 0, 1310715, 65536, 0, 1310716, 65536, 0, 1310717, 65536, 0, 1310718, 65536, 0, 1310719, 65536, 0, 1245184, 65536, 0, 1245185, 65536, 0, 1245186, 65536, 0, 1245187, 65536, 0, 1245188, 65536, 0, 1245189, 65536, 0, 1245190, 65536, 0, 1245191, 65536, 0, 1245192, 65536, 0, 1245193, 65536, 0, 1245194, 65536, 0, 1245195, 65536, 0, 1245196, 65536, 0, 1245197, 65536, 0, 1245198, 65536, 0, 1245199, 65536, 0, 1245200, 65536, 0, 1245201, 65536, 0, 1245202, 65536, 0, 1245203, 65536, 0, 1245204, 65536, 0, 1245205, 65536, 0, 1245206, 65536, 0, 1310751, 0, 0, 1310752, 0, 0, 1310753, 0, 0, 1310754, 0, 0, 1310755, 0, 0, 1310756, 0, 0)
-
-[node name="Player" parent="." instance=ExtResource("5")]
-position = Vector2(-555, 299)
+tile_set = ExtResource("4_m70en")
+layer_0/tile_data = PackedInt32Array(1310697, 65536, 0, 1310698, 65536, 0, 1310699, 65536, 0, 1310700, 65536, 0, 1310701, 65536, 0, 1310702, 65536, 0, 1310703, 65536, 0, 1310704, 65536, 0, 1310705, 65536, 0, 1310706, 65536, 0, 1310707, 65536, 0, 1310708, 65536, 0, 1310709, 65536, 0, 1310710, 65536, 0, 1310711, 65536, 0, 1310712, 65536, 0, 1310713, 65536, 0, 1310714, 65536, 0, 1310715, 65536, 0, 1310716, 65536, 0, 1310717, 65536, 0, 1310718, 65536, 0, 1310719, 65536, 0, 1245184, 65536, 0, 1245185, 65536, 0, 1245186, 65536, 0, 1245187, 65536, 0, 1245188, 65536, 0, 1245189, 65536, 0, 1245190, 65536, 0, 1245191, 65536, 0, 1245192, 65536, 0, 1245193, 65536, 0, 1245194, 65536, 0, 1245195, 65536, 0, 1245196, 65536, 0, 1245197, 65536, 0, 1245198, 65536, 0, 1245199, 65536, 0, 1245200, 65536, 0, 1245201, 65536, 0, 1245202, 65536, 0, 1245203, 65536, 0, 1245204, 65536, 0, 1245205, 65536, 0, 1245206, 65536, 0, 1310751, 0, 0, 1310752, 0, 0, 1310753, 0, 0, 1310754, 0, 0, 1310755, 0, 0, 1310756, 0, 0, 720885, 131072, 0, 720886, 131072, 0, 720887, 131072, 0, 720895, 131072, 0, 655360, 131072, 0, 655369, 131072, 0, 655368, 131072, 0, 1245148, 196608, 0)
 
 [node name="ScreenCamera" parent="." instance=ExtResource("6")]
 visible = false

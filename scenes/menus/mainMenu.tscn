@@ -1,48 +1,102 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqcqg1rcjgs6c"]
+[gd_scene load_steps=9 format=3 uid="uid://cqcqg1rcjgs6c"]
 
 [ext_resource type="Texture2D" uid="uid://t3dwj3pvdaa4" path="res://sprites/1365-sparkles-yellow.png" id="1"]
-[ext_resource type="Script" path="res://scripts/menu/load button.gd" id="2"]
-[ext_resource type="Script" path="res://scripts/menu/quit.gd" id="3"]
 [ext_resource type="Texture2D" uid="uid://221mmlwsdyi2" path="res://sprites/player/dead.png" id="4"]
-[ext_resource type="Script" path="res://scenes/menus/dumbthing.gd" id="5"]
 
 [sub_resource type="ParticleProcessMaterial" id="1"]
 lifetime_randomness = 0.13
 particle_flag_disable_z = true
 direction = Vector3(0, -10, 0)
 spread = 85.32
-gravity = Vector3(0, -100, 0)
 initial_velocity_max = 136.0
 angular_velocity_min = -92.16
 angular_velocity_max = 46.08
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
+gravity = Vector3(0, -100, 0)
 scale_min = 0.5
 scale_max = 0.5
 
-[sub_resource type="Animation" id="2"]
-resource_name = "jump"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.4),
-"transitions": PackedFloat32Array(1, 0.049, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.7, 1), Vector2(1, 1)]
-}
+[sub_resource type="GDScript" id="GDScript_xvcv1"]
+resource_name = "level load button"
+script/source = "extends Button
 
-[sub_resource type="AnimationLibrary" id="3"]
-_data = {
-"jump": SubResource("2")
-}
+var selectedLevel = 0
 
-[sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(32, 32)
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.pressed.connect(self._button_pressed)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	selectedLevel = get_parent().selected
+
+func _button_pressed():
+	get_node(\"/root/Main\").startLevel(\"res://scenes/levels/\"+str(selectedLevel)+\".tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_xo4xu"]
+resource_name = "test level loader"
+script/source = "extends Button
+
+func _on_pressed():
+	get_node(\"/root/Main\").loadScene(\"res://scenes/levels/test.tscn\")
+"
+
+[sub_resource type="GDScript" id="GDScript_l1jx7"]
+resource_name = "custom load button"
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_pressed():
+	$loadDialog.show()
+	
+
+func _on_load_dialog_file_selected(path):
+	get_node(\"/root/Main\").startLevel(path)
+"
+
+[sub_resource type="GDScript" id="GDScript_71jgw"]
+resource_name = "quit"
+script/source = "extends Button
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.pressed.connect(self._button_pressed)
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+func _button_pressed():
+	get_tree().quit()
+"
+
+[sub_resource type="GDScript" id="GDScript_dq4v8"]
+resource_name = "versionUpdater"
+script/source = "extends Label
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	self.text = get_node(\"/root/Main\").gameVersion
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="mainMenu" type="Node2D"]
 
@@ -74,10 +128,10 @@ lifetime = 12.0
 local_coords = true
 
 [node name="level select" type="Label" parent="."]
-offset_left = 536.0
-offset_top = 384.0
-offset_right = 744.0
-offset_bottom = 415.0
+offset_left = 531.0
+offset_top = 386.0
+offset_right = 739.0
+offset_bottom = 417.0
 theme_override_font_sizes/font_size = 20
 text = "levels"
 horizontal_alignment = 1
@@ -85,10 +139,10 @@ vertical_alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="level select"]
 layout_mode = 0
-offset_left = -75.0
-offset_top = 34.0
-offset_right = 256.0
-offset_bottom = 65.0
+offset_left = -60.0
+offset_top = 35.0
+offset_right = 271.0
+offset_bottom = 66.0
 alignment = 1
 item_count = 3
 selected = 0
@@ -96,18 +150,43 @@ popup/item_0/text = "The Climb"
 popup/item_0/id = 0
 popup/item_1/text = "Spike Pit"
 popup/item_1/id = 1
-popup/item_2/text = "A Really Fun Level"
+popup/item_2/text = "A Really \"Fun\" Level"
 popup/item_2/id = 2
-popup/item_2/disabled = true
 
 [node name="load button" type="Button" parent="level select/OptionButton"]
 layout_mode = 0
-offset_left = 142.0
-offset_top = 38.0
-offset_right = 206.0
-offset_bottom = 77.0
+offset_left = 132.0
+offset_top = 39.0
+offset_right = 196.0
+offset_bottom = 78.0
 text = "Load"
-script = ExtResource("2")
+script = SubResource("GDScript_xvcv1")
+
+[node name="test level load button" type="Button" parent="."]
+offset_left = 570.0
+offset_top = 584.0
+offset_right = 697.0
+offset_bottom = 623.0
+text = "Load Test Level"
+script = SubResource("GDScript_xo4xu")
+
+[node name="custom level load button" type="Button" parent="."]
+offset_left = 560.0
+offset_top = 530.0
+offset_right = 714.0
+offset_bottom = 561.0
+text = "Load Custom Level"
+script = SubResource("GDScript_l1jx7")
+
+[node name="loadDialog" type="FileDialog" parent="custom level load button"]
+title = "Open a File"
+position = Vector2i(300, 70)
+size = Vector2i(750, 600)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tscn ; Scene File")
+show_hidden_files = true
 
 [node name="copyright thingy" type="CheckButton" parent="."]
 offset_left = 1037.0
@@ -116,7 +195,7 @@ offset_right = 1356.0
 offset_bottom = 769.0
 focus_mode = 0
 toggle_mode = false
-text = "copyright madeline 2023
+text = "copyright madeline 2024
 
 god damn this test menu is horrific"
 alignment = 1
@@ -134,30 +213,20 @@ offset_left = 544.0
 offset_top = 640.0
 offset_right = 730.0
 offset_bottom = 694.0
-tooltip_text = "i programmed this button in so use it anyway"
-text = "Quit
-(alt-f4 is less effort)"
-script = ExtResource("3")
+text = "Quit"
+script = SubResource("GDScript_71jgw")
 
 [node name="game name" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "HyperCube 0.0.6"
+text = "game version"
+script = SubResource("GDScript_dq4v8")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="harper" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(628, 163)
 texture = ExtResource("4")
-script = ExtResource("5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-libraries = {
-"": SubResource("3")
-}
-
-[node name="Area2D" type="Area2D" parent="Sprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
-shape = SubResource("4")
-
-[connection signal="input_event" from="Sprite/Area2D" to="Sprite" method="_on_area_2d_input_event" flags=18]
+[connection signal="pressed" from="test level load button" to="test level load button" method="_on_pressed"]
+[connection signal="pressed" from="custom level load button" to="custom level load button" method="_on_pressed"]
+[connection signal="file_selected" from="custom level load button/loadDialog" to="custom level load button" method="_on_load_dialog_file_selected"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nkj8pmsbcwk7"
-path="res://.godot/imported/spike.png-68e072f4c96479240cc871eec6390c18.ctex"
+uid="uid://c6o8hqmf2dw51"
+path="res://.godot/imported/sparkles2.png-746c51c8a98ce97700731901d78078db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/objects/spike.png"
-dest_files=["res://.godot/imported/spike.png-68e072f4c96479240cc871eec6390c18.ctex"]
+source_file="res://sprites/objects/coin/sparkles2.png"
+dest_files=["res://.godot/imported/sparkles2.png-746c51c8a98ce97700731901d78078db.ctex"]
 
 [params]
 

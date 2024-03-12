@@ -1,0 +1,142 @@
+[gd_scene load_steps=8 format=3 uid="uid://dit1c0e7c0qya"]
+
+[sub_resource type="GDScript" id="GDScript_kx8o8"]
+resource_name = "hud"
+script/source = "extends CanvasLayer
+
+@export var coins: int = 0
+var time
+var secondtime
+var minute
+var second
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	$Version.text = get_parent().gameVersion
+	reset()
+
+func reset():
+	coins = 0
+	time = 0.0
+	secondtime = 0.0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	minute = floor(time / 60)
+	second = floor(secondtime)
+	if secondtime > 60:
+		secondtime = 0.0
+	$\"Coins\".text = \"Coins: \"+str(coins)
+	$\"Time\".text = \"Time: \"+str(\"%d:%02d\" % [minute, second])
+	time += delta
+	secondtime += delta
+"
+
+[sub_resource type="Theme" id="Theme_t4c3c"]
+default_font_size = 128
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_s47ly"]
+
+[sub_resource type="Animation" id="2"]
+resource_name = "fadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.285262, 0.307786),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "fadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.285262, 0.307786),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "flash"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0279, 0.5),
+"transitions": PackedFloat32Array(1, 0.732049, 1.23114),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="5"]
+_data = {
+"fadeIn": SubResource("2"),
+"fadeOut": SubResource("3"),
+"flash": SubResource("4")
+}
+
+[node name="HUD" type="CanvasLayer"]
+script = SubResource("GDScript_kx8o8")
+
+[node name="Coins" type="Label" parent="."]
+offset_left = 45.0
+offset_top = 25.0
+offset_right = 281.0
+offset_bottom = 200.0
+scale = Vector2(0.324899, 0.324899)
+theme = SubResource("Theme_t4c3c")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+text = "Coins: NaN"
+
+[node name="Version" type="Label" parent="."]
+offset_left = 1114.0
+offset_top = 694.0
+offset_right = 2126.0
+offset_bottom = 869.0
+scale = Vector2(0.147342, 0.147342)
+theme = SubResource("Theme_t4c3c")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+text = "version"
+
+[node name="Time" type="Label" parent="."]
+offset_left = 45.0
+offset_top = 78.0
+offset_right = 691.0
+offset_bottom = 253.0
+scale = Vector2(0.336534, 0.336534)
+theme = SubResource("Theme_t4c3c")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 48
+text = "Time: NaN"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("CanvasItemMaterial_s47ly")
+offset_left = -3217.0
+offset_top = -2258.0
+offset_right = 3353.0
+offset_bottom = 2462.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+libraries = {
+"": SubResource("5")
+}
